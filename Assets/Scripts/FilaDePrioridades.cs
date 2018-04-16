@@ -65,6 +65,19 @@ public class FilaDePrioridades<T> : MonoBehaviour
 
     }
 
+    public T get()
+    {
+        T retorto = primeiro.valor;
+        primeiro = primeiro.anterior;
+
+        return retorto;
+    }
+
+    public Boolean contemNos()
+    {
+        return primeiro != null;
+    }
+
     public override string ToString()
     {
         No atual = primeiro;

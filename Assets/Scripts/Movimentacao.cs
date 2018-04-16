@@ -56,52 +56,36 @@ public class Movimentacao : MonoBehaviour {
             FilaDePrioridades<char> teste = new FilaDePrioridades<char>();
 
             teste.Add('a', 2);
-            Debug.Log(teste);
-
             teste.Add('v', 1);
-            Debug.Log(teste);
-
             teste.Add('o', 0);
-            Debug.Log(teste);
-
             teste.Add('u', 5);
-            Debug.Log(teste);
-
             teste.Add('t', 3);
-            Debug.Log(teste);
 
             teste.Add('s', 4);
-            Debug.Log(teste);
-
             teste.Add('G', 6);
-            Debug.Log(teste);
 
             teste.Add(' ', -1);
-            Debug.Log(teste);
 
             teste.Add('F', -2);
-            Debug.Log(teste);
 
             teste.Add('a', -3);
-            Debug.Log(teste);
 
             teste.Add('z', -4);
-            Debug.Log(teste);
 
             teste.Add('a', -5);
-            Debug.Log(teste);
 
             teste.Add('n', -6);
-            Debug.Log(teste);
 
             teste.Add('i', -7);
-            Debug.Log(teste);
 
             teste.Add('X', -8);
-            Debug.Log(teste);
 
             teste.Add('Y', -8);
-            Debug.Log(teste);
+
+            while (teste.contemNos())
+            {
+                Debug.Log(teste.get());
+            }
 
             //Vector3 mousePos = getPosicaoMouseNaGrid();
             //aEstrela(mousePos);
