@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.IO;
 
 public class criadorDeMapas : MonoBehaviour
 {
     public string[] mapa;
     int x, y;
-    Transform prefab;
+    FabricaDePersonages fab;
 
-    public void criaMapa(Transform prefab)
+    public void criaMapa(Transform parede, Transform personagem)
     {
+        fab = new FabricaDePersonages(personagem);
+
         mapa = File.ReadAllLines("Mapas\\testes.txt");
 
         float cameraAltura = 2f * Camera.main.orthographicSize;
@@ -24,9 +25,22 @@ public class criadorDeMapas : MonoBehaviour
             {
                 x++;
                 if(coluna == '*')
-                    Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
+                    Instantiate(parede, new Vector3(x, y, 0), Quaternion.identity);
+                if (coluna == 'A')
+                    MontaTimeA(x, y);
+                if (coluna == 'B')
+                    MontaTimeB(x, y);
             }
         }
     }
 
+    void MontaTimeA(int x, int y)
+    {
+        fab.criaPersonagem(0, x, y);
+    }
+
+    void MontaTimeB(int x, int y)
+    {
+        fab.criaPersonagem(1, x, y);
+    }
 }

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 054953ad5a6c6a84aa0a74a9d2a4caa8
+timeCreated: 1524946584
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - azul: {fileID: 21300000, guid: 8cabf1579c54b0b4793a0e965299b4c0, type: 3}
+  - vermelho: {fileID: 21300000, guid: 970167bec2924b243893512771e9356f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

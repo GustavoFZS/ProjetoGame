@@ -12,7 +12,6 @@ public class Movimentacao : MonoBehaviour {
     public IEnumerator Mover()
     {
         AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), getPosicaoMouseNaGrid());
-        buscaCaminho.prefab = prefab;
         buscaCaminho.solido = solido;
         Stack<Passo> pilha = buscaCaminho.getCaminho();
         Passo atual;
@@ -25,6 +24,16 @@ public class Movimentacao : MonoBehaviour {
             atual = atual.anterior;
             yield return new WaitForSeconds(0.08f);
         }
+    }
+
+    public void mostraRota()
+    {
+
+        BuscaLargura buscaCaminho = new BuscaLargura(new Vector2(transform.position.x, transform.position.y), 5);
+        buscaCaminho.prefab = prefab;
+        buscaCaminho.solido = solido;
+        buscaCaminho.busca();
+
     }
 
     public Vector3 getPosicaoMouseNaGrid()

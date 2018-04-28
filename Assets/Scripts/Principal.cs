@@ -32,7 +32,10 @@ public class Principal : MonoBehaviour {
 
     void OnMouseUp()
     {
+        box.enabled = false;
+        GetComponent<Movimentacao>().mostraRota();
         selecionado = true;
+        box.enabled = true;
     }
 
 }

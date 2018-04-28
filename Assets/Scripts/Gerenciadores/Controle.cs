@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Controle : MonoBehaviour {
 
@@ -9,10 +7,11 @@ public class Controle : MonoBehaviour {
     static float alturaMapa;
 
     public Transform paredes;
+    public Transform personagem;
 
     private void Awake()
     {
-        t.criaMapa(paredes);
+        t.criaMapa(paredes, personagem);
         larguraMapa = getMapa()[0].Length;
         alturaMapa = getMapa().Length;
     }

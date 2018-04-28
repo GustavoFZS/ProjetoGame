@@ -52,3 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paredes: {fileID: 4101124071410118, guid: 8ede7edacdaef0a4681d0d200d387894, type: 2}
+  personagem: {fileID: 4225614645596870, guid: 47f467b9ba1a95c48bb6fb5b0da8253a, type: 2}

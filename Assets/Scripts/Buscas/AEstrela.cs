@@ -9,7 +9,6 @@ public class AEstrela : MonoBehaviour
     Vector2 posIni;
     Vector2 posFim;
     string[] mapa;
-    public Transform prefab;
     public LayerMask solido;
 
     public AEstrela(Vector2 posIni, Vector2 posFim)
@@ -92,7 +91,6 @@ public class AEstrela : MonoBehaviour
                     visitados.Add(novo, pesoTotal);
                     grafoBusca.Add(novo, pesoTotal);
                 }
-                Instantiate(prefab, new Vector3(novo.x, novo.y, 0), Quaternion.identity);
             }
         }
 
