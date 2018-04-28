@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class FilaDePrioridades<T> : MonoBehaviour
+public class FilaDePrioridades<T>
 {
 
     No primeiro;
@@ -46,7 +46,7 @@ public class FilaDePrioridades<T> : MonoBehaviour
             return;
         }
 
-        if (novo.CompareTo(primeiro) > 0)
+        if (novo.CompareTo(primeiro) < 0)
         {
             novo.anterior = primeiro;
             primeiro = novo;
@@ -55,7 +55,7 @@ public class FilaDePrioridades<T> : MonoBehaviour
 
         No atual = primeiro;
 
-        while (atual.anterior != null && novo.CompareTo(atual.anterior) < 0)
+        while (atual.anterior != null && novo.CompareTo(atual.anterior) >= 0)
         {
             atual = atual.anterior;
         }
@@ -67,10 +67,15 @@ public class FilaDePrioridades<T> : MonoBehaviour
 
     public T get()
     {
-        T retorto = primeiro.valor;
+        T retorno = primeiro.valor;
         primeiro = primeiro.anterior;
 
-        return retorto;
+        return retorno;
+    }
+
+    public void limpa()
+    {
+        primeiro = null;
     }
 
     public Boolean contemNos()

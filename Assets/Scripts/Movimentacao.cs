@@ -5,147 +5,35 @@ using UnityEngine;
 
 public class Movimentacao : MonoBehaviour {
 
-    public static readonly int tamPasso = 1;
+    public Transform prefab;
+    public LayerMask solido;
 
-    class Passo : IComparable<Passo>
+
+    public IEnumerator Mover()
     {
-        public float x;
-        public float y;
-        public int peso;
-        public Passo anterior;
+        AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), getPosicaoMouseNaGrid());
+        buscaCaminho.prefab = prefab;
+        buscaCaminho.solido = solido;
+        Stack<Passo> pilha = buscaCaminho.getCaminho();
+        Passo atual;
 
-        public Passo(float x, float y, int peso, Passo anterior)
+        while (pilha.Count != 0)
         {
-            this.x = x;
-            this.y = y;
-            this.peso = peso;
-            this.anterior = anterior;
+            atual = pilha.Pop();
+            Vector3 novaPos = new Vector2(atual.x, atual.y);
+            transform.position = novaPos;
+            atual = atual.anterior;
+            yield return new WaitForSeconds(0.08f);
         }
-
-        public int CompareTo(Passo obj)
-        {
-            if (obj == null) return 1;
-
-            if (this.peso == obj.peso) return 1;
-
-            return this.peso - obj.peso;
-        }
-
-        public override string ToString()
-        {
-            return "X:" + x + " Y:" + y + " Peso:" + peso + " Anterior:" + anterior;
-        }
-
-    }
-
-    SortedList<Passo, int> sorted;
-
-    // Use this for initialization
-    void Start () {
-
-        sorted = new SortedList<Passo, int>();
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            FilaDePrioridades<char> teste = new FilaDePrioridades<char>();
-
-            teste.Add('a', 2);
-            teste.Add('v', 1);
-            teste.Add('o', 0);
-            teste.Add('u', 5);
-            teste.Add('t', 3);
-
-            teste.Add('s', 4);
-            teste.Add('G', 6);
-
-            teste.Add(' ', -1);
-
-            teste.Add('F', -2);
-
-            teste.Add('a', -3);
-
-            teste.Add('z', -4);
-
-            teste.Add('a', -5);
-
-            teste.Add('n', -6);
-
-            teste.Add('i', -7);
-
-            teste.Add('X', -8);
-
-            teste.Add('Y', -8);
-
-            while (teste.contemNos())
-            {
-                Debug.Log(teste.get());
-            }
-
-            //Vector3 mousePos = getPosicaoMouseNaGrid();
-            //aEstrela(mousePos);
-
-        }
-
-    }
-
-    void OnMouseDown()
-    {
-		
-		Debug.Log("Fui clicado");
-		
-    }
-
-    Passo[] getSucessores(Passo pos)
-    {
-
-        Passo[] retorno = new Passo[4];
-        float[] aux = {1,-1,0,0};
-        float x = pos.x;
-        float y = pos.y;
-
-        for (int i = 0; i < 4; i++)
-        {
-            retorno[i] = new Passo(x + tamPasso * aux[i], y + tamPasso * aux[(i + 2) % 4], 0, null);
-        }
-
-        return retorno;
-
-    }
-
-    public void aEstrela(Vector3 pos)
-    {
-
-        Passo inicio = new Passo(pos.x, pos.y, 0, null);
-        sorted.Add(inicio, 0);
-
-        while (sorted.Count != 0)
-        {
-            Passo atual = sorted.Keys[0];
-
-            Passo[] retorno = getSucessores(atual);
-            for (int i = 0; i < retorno.Length; i++)
-            {
-                Debug.Log(retorno[i]);
-                sorted.Add(retorno[i], i);
-            }
-            Debug.Log(sorted.Keys[0]);
-        }
-
     }
 
     public Vector3 getPosicaoMouseNaGrid()
     {
 
-        Vector3 vetorAux;
+        Vector2 vetorAux;
 
-        vetorAux = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-        vetorAux = new Vector3(Mathf.Round(vetorAux.x), Mathf.Round(vetorAux.y), vetorAux.z);
+        vetorAux = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
+        vetorAux = new Vector2(Mathf.Round(vetorAux.x), Mathf.Round(vetorAux.y));
 
         return vetorAux;
 

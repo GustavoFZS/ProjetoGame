@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212365190679807880}
   m_Layer: 0
   m_Name: Passo
-  m_TagString: Untagged
+  m_TagString: AreaDeSelecao
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
