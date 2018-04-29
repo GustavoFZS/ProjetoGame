@@ -16,6 +16,8 @@ public class FabricaDePersonages : MonoBehaviour{
     public Transform criaPersonagem(int time, int x, int y)
     {
         Transform retorno = Instantiate(personagem, new Vector3(x, y, 0), Quaternion.identity);
+        retorno.GetComponent<Principal>().time = time;
+
         if (time == 1)
         {
             retorno.GetComponent<SpriteRenderer>().sprite = azul;
