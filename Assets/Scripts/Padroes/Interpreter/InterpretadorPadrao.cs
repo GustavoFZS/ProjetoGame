@@ -1,15 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-public class InterpretadorPadrao : MonoBehaviour, Interpretador
+public class InterpretadorPadrao : Interpretador
 {
 
-    public void recebeMensagem(Principal destino, string mensagem)
+    public override void recebeMensagem(Principal destino, string mensagem)
     {
         char[] quebras = { '|', ','};
         string[] expressao = mensagem.Split(quebras[0]);
         string efeito = expressao[0];
-        Debug.Log(mensagem + " " + expressao[0] + " " + expressao[1]) ;
         string[] valores = expressao[1].Split(quebras[1]);
 
         destino.adiconaEfeito(efeito);

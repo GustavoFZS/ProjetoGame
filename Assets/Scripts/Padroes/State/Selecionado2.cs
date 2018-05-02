@@ -2,7 +2,7 @@
 {
     Principal personagem;
 
-    public Selecionado2(Principal personagem) : base(personagem)
+    public Selecionado2(Principal personagem)
     {
         this.personagem = personagem;
         personagem.mudaBox();
@@ -10,11 +10,11 @@
         personagem.mudaBox();
     }
 
-    public override void clicado()
+    public void clicado()
     {
     }
 
-    public override void executaAcao()
+    public void executaAcao()
     {
         if (!Controle.checaAcao(personagem.time))
         {
@@ -23,9 +23,19 @@
         }
     }
 
-    public override void novoEstado()
+    public bool useMouse()
+    {
+        return true;
+    }
+
+    public void novoEstado()
     {
         personagem.setEstado(new Indisponivel(personagem));
+    }
+
+    public State clone(Principal personagem)
+    {
+        return new Selecionado2(personagem);
     }
 
 }

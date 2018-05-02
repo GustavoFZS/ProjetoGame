@@ -1,25 +1,39 @@
-﻿public class PodeAndaEAtacar : State
+﻿using UnityEngine;
+
+public class PodeAndaEAtacar : State
 {
     Principal personagem;
 
-    public PodeAndaEAtacar(Principal personagem) : base(personagem)
+    public PodeAndaEAtacar(Principal personagem)
     {
         this.personagem = personagem;
     }
 
-    public override void clicado()
+    public void clicado()
     {
+        Debug.Log("achei");
         novoEstado();
         Controle.escolhido = personagem;
     }
 
-    public override void executaAcao()
+    public void executaAcao()
     {
     }
 
-    public override void novoEstado()
+
+    public bool useMouse()
+    {
+        return false;
+    }
+
+    public void novoEstado()
     {
         personagem.setEstado(new Selecionado(personagem));
+    }
+
+    public State clone(Principal personagem)
+    {
+        return new PodeAndaEAtacar(personagem);
     }
 
 }

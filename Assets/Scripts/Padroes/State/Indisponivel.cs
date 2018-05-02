@@ -1,24 +1,35 @@
-﻿public class Indisponivel : State
+﻿using UnityEngine;
+
+public class Indisponivel : State
 {
     Principal personagem;
-
-    public Indisponivel(Principal personagem) : base(personagem)
+    
+    public Indisponivel(Principal personagem)
     {
         this.personagem = personagem;
     }
 
-    public override void clicado()
+    public void clicado()
     {
         Controle.escolhido = personagem;
     }
 
-    public override void executaAcao()
+    public void executaAcao()
+    {    }
+
+    public bool useMouse()
     {
+        return false;
     }
 
-    public override void novoEstado()
+    public void novoEstado()
     {
         personagem.setEstado(new PodeAndaEAtacar(personagem));
+    }
+
+    public State clone(Principal personagem)
+    {
+        return new Indisponivel(personagem);
     }
 
 }

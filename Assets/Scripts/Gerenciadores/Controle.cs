@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Controle : MonoBehaviour {
 
     static criadorDeMapas t = new criadorDeMapas();
+    CenaCareTaker cenas = new CenaCareTaker();
     static float larguraMapa;
     static float alturaMapa;
     public static int turno;
@@ -21,12 +23,8 @@ public class Controle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        turno = 0;
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].GetComponent<Principal>().mudaTurno();
-        }
+        turno = 1;
+        mudaTurno();
     }
 	
 	// Update is called once per frame
@@ -34,12 +32,28 @@ public class Controle : MonoBehaviour {
         
         if (Input.GetButtonDown("PassaTurno"))
         {
-            turno = turno == 0 ? 1 : 0;
-            Debug.Log("Troca de turno: " + turno);
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            for (int i = 0; i < players.Length; i++)
+            mudaTurno();
+        }
+
+        if (Input.GetButtonDown("Volta"))
+        {
+            if (cenas.contemElementos())
             {
-                players[i].GetComponent<Principal>().mudaTurno();
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                for (int i = 0; i < players.Length; i++)
+                {
+                    Destroy(players[i]);
+                }
+                CenaMemento cenaAnterior = cenas.getUltimoEstadoSalvo();
+                LinkedList<GameObject> personagens = cenaAnterior.getCena();
+                while (personagens.Count > 0)
+                {
+                    GameObject teste = Instantiate(personagens.First.Value);
+                    teste.GetComponent<Principal>().setEstado(personagens.First.Value.GetComponent<Principal>().getEstado());
+                    teste.SetActive(true);
+                    personagens.RemoveFirst();
+                }
+                Debug.Log("Desfazer");
             }
         }
 
@@ -80,5 +94,20 @@ public class Controle : MonoBehaviour {
         if (escolhido == null)
             return true;
         return time == escolhido.time;
+    }
+
+    void mudaTurno()
+    {
+        turno = turno == 0 ? 1 : 0;
+        LinkedList<GameObject> players = new LinkedList<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        LinkedList<GameObject> estadoAnterior = new LinkedList<GameObject>();
+        LinkedList<GameObject>.Enumerator enu = players.GetEnumerator();
+        while (enu.MoveNext())
+        {
+            enu.Current.GetComponent<Principal>().mudaTurno();
+            estadoAnterior.AddFirst(enu.Current.GetComponent<Principal>().clone());
+        }
+        CenaMemento novaCena = new CenaMemento(estadoAnterior);
+        cenas.adicionarMemento(novaCena);
     }
 }

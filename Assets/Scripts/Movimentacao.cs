@@ -7,7 +7,6 @@ public class Movimentacao : MonoBehaviour {
     public Transform prefab;
     public LayerMask solido;
 
-
     public IEnumerator Mover()
     {
         AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), getPosicaoMouseNaGrid());

@@ -2,24 +2,32 @@
 {
     Principal personagem;
 
-    public PodeAtacar(Principal personagem) : base(personagem)
+    public PodeAtacar(Principal personagem)
     {
         this.personagem = personagem;
     }
 
-    public override void clicado()
+    public void clicado()
     {
         novoEstado();
     }
 
-    public override void executaAcao()
-    {
+    public void executaAcao()
+    {}
 
+    public bool useMouse()
+    {
+        return false;
     }
 
-    public override void novoEstado()
+    public void novoEstado()
     {
         personagem.setEstado(new Selecionado2(personagem));
+    }
+
+    public State clone(Principal personagem)
+    {
+        return new PodeAtacar(personagem);
     }
 
 }

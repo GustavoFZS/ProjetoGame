@@ -86,10 +86,18 @@ public class AEstrela : MonoBehaviour
                 Passo novo = retorno.Dequeue();
                 int pesoTotal = novo.peso + Heuristica(novo, fim);
 
-                if (!visitados.ContainsKey(novo) || visitados[novo] > pesoTotal)
+                if (!visitados.ContainsKey(novo))
                 {
-                    visitados.Add(novo, pesoTotal);
+                    visitados[novo] = pesoTotal;
                     grafoBusca.Add(novo, pesoTotal);
+
+                } else
+                {
+                    if (visitados[novo] > pesoTotal)
+                    {
+                        visitados[novo] = pesoTotal;
+                        grafoBusca.Add(novo, pesoTotal);
+                    }
                 }
             }
         }
