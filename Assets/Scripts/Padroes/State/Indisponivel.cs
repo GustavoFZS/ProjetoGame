@@ -9,27 +9,19 @@ public class Indisponivel : State
         this.personagem = personagem;
     }
 
-    public void clicado()
+    public override void clicado()
     {
         Controle.escolhido = personagem;
     }
 
-    public void executaAcao()
-    {    }
-
-    public bool useMouse()
+    public override bool useMouse()
     {
         return false;
     }
 
-    public void novoEstado()
+    public override void novoEstado()
     {
         personagem.setEstado(new PodeAndaEAtacar(personagem));
-    }
-
-    public State clone(Principal personagem)
-    {
-        return new Indisponivel(personagem);
     }
 
 }

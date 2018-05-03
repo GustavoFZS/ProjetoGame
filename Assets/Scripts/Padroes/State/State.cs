@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-public interface State
+public abstract class State
 {
-    void clicado();
+    public virtual void clicado() {
+    }
 
-    void executaAcao();
+    public virtual void executaAcao() {
+    }
 
-    void novoEstado();
+    public abstract void novoEstado();
 
-    bool useMouse();
-
-    State clone(Principal personagem);
-
+    public abstract bool useMouse();
+    
 }

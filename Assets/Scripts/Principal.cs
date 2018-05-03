@@ -32,14 +32,8 @@ public class Principal : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (estado.useMouse())
-        {
-            Debug.Log("asas" + estado);
-        }
-
         if (Input.GetMouseButtonDown(0) && mouseFora && estado.useMouse())
         {
-            Debug.Log("kct32" + estado);
             estado.executaAcao();
         }
 
@@ -57,7 +51,6 @@ public class Principal : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log("achei21");
         Controle.selecionado = this;
         estado.clicado();
     }
@@ -84,7 +77,6 @@ public class Principal : MonoBehaviour {
 
     public void apagaRotas()
     {
-        Debug.Log("HAHAHa");
         var areasDeSelecao = GameObject.FindGameObjectsWithTag("AreaDeSelecao");
         for (int i = 0; i < areasDeSelecao.Length; i++)
         {
@@ -115,7 +107,6 @@ public class Principal : MonoBehaviour {
     public void setEstado(State estado)
     {
         this.estado = estado;
-        Debug.Log("teste200" + this.estado);
     }
 
     public State getEstado()
@@ -168,14 +159,6 @@ public class Principal : MonoBehaviour {
         clonePrincipal.habilidade = habilidade;
         clonePrincipal.time = time;
         clonePrincipal.interpretador = interpretador.clone();
-
-        if (time == Controle.turno) { 
-            clonePrincipal.estado = new Indisponivel(clonePrincipal);
-            clonePrincipal.estado.novoEstado();
-        }
-        else{
-            clonePrincipal.estado = new Indisponivel(clonePrincipal);
-}
  
         Dictionary<string, int> cloneEfeitos = new Dictionary<string, int>();
 
@@ -195,7 +178,7 @@ public class Principal : MonoBehaviour {
 
     public override string ToString()
     {
-        return "Ataque: " + estado + "  Vida: " + vida + " Alcance: " + alcance + " Movimentacao: " + movimentacao;
+        return "Ataque: " + ataque + "  Vida: " + vida + " Alcance: " + alcance + " Movimentacao: " + movimentacao;
     }
 
 }

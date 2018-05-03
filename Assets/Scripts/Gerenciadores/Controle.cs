@@ -46,11 +46,12 @@ public class Controle : MonoBehaviour {
                 }
                 CenaMemento cenaAnterior = cenas.getUltimoEstadoSalvo();
                 LinkedList<GameObject> personagens = cenaAnterior.getCena();
+                turno = cenaAnterior.getTurno();
                 while (personagens.Count > 0)
                 {
-                    GameObject teste = Instantiate(personagens.First.Value);
-                    teste.GetComponent<Principal>().setEstado(personagens.First.Value.GetComponent<Principal>().getEstado());
-                    teste.SetActive(true);
+                    GameObject original = Instantiate(personagens.First.Value);
+                    original.GetComponent<Principal>().mudaTurno();
+                    original.SetActive(true);
                     personagens.RemoveFirst();
                 }
                 Debug.Log("Desfazer");
