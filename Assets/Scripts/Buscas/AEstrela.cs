@@ -9,17 +9,17 @@ public class AEstrela : MonoBehaviour
     Vector2 posIni;
     Vector2 posFim;
     string[] mapa;
+    int tamPasso;
     public LayerMask solido;
 
-    public AEstrela(Vector2 posIni, Vector2 posFim)
+    public AEstrela(Vector2 posIni, Vector2 posFim, String[] mapa)
     {
         this.posIni = posIni;
         this.posFim = posFim;
-        this.mapa = Controle.getMapa();
+        this.mapa = mapa;
+        this.tamPasso = Controle.tamanhoCasas;
     }
-
-    public static readonly int tamPasso = 1;
-
+    
     public Stack<Passo> getCaminho()
     {
         Stack<Passo> pilha = new Stack<Passo>();

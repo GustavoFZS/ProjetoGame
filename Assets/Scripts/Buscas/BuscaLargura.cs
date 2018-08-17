@@ -19,7 +19,7 @@ public class BuscaLargura : MonoBehaviour
         this.tamBusca = tamBusca;
     }
 
-    public static readonly int tamPasso = 1;
+    public static readonly int tamPasso = Controle.tamanhoCasas;
 
     Queue<Passo> getSucessores(Passo pos)
     {
@@ -51,14 +51,11 @@ public class BuscaLargura : MonoBehaviour
         Passo inicio = new Passo((int)posIni.x, (int)posIni.y, 0, null);
         Passo fim = new Passo((int)posFim.x, (int)posFim.y, 0, null);
         grafoBusca.Enqueue(inicio);
-
-        int teste = 0;
-
+        
         while (grafoBusca.Count > 0)
         {
             Passo atual = grafoBusca.Dequeue();
             Queue<Passo> retorno = getSucessores(atual);
-            teste++;
 
             while (retorno.Count > 0)
             {
@@ -69,7 +66,8 @@ public class BuscaLargura : MonoBehaviour
                     visitados.Enqueue(novo);
                     grafoBusca.Enqueue(novo);
                 }
-                Instantiate(prefab, new Vector3(novo.x, novo.y, 1), Quaternion.identity);
+                var efeito = Instantiate(prefab, new Vector3(novo.x, novo.y, 1), Quaternion.identity);
+                efeito.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
             }
 
         }

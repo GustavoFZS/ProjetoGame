@@ -11,30 +11,28 @@ public class Principal : MonoBehaviour {
     public int time;
     public float defesa;
 
-    bool mouseFora = false;
+        bool mouseFora = false;
     string habilidade;
     BoxCollider2D box;
     Dictionary<string, int> efeitos = new Dictionary<string, int>();
     Interpretador interpretador = new InterpretadorPadrao();
     State estado;
 
-    // Use this for initialization
     void Start() {
         box = GetComponent<BoxCollider2D>();
         vida = 120;
         defesa = 0.2f;
-        ataque = 12;
         alcance = 7;
         movimentacao = 5;
         habilidade = "padrao";
     }
 
-    // Update is called once per frame
     void Update() {
 
         if (Input.GetMouseButtonDown(0) && mouseFora && estado.useMouse())
         {
             estado.executaAcao();
+            Debug.Log("oi");
         }
 
     }
@@ -87,13 +85,12 @@ public class Principal : MonoBehaviour {
     public bool anda()
     {
         mudaBox();
+        apagaRotas();
         if (StartCoroutine(GetComponent<Movimentacao>().Mover()) == null)
         {
-            apagaRotas();
             mudaBox();
             return false;
         }
-        apagaRotas();
         mudaBox();
         return true;
     }

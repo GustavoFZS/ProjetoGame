@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class CameraControlador : MonoBehaviour {
 
-    int velocidade = 5;
+    int velocidade = 25;
     float cameraAltura;
     float cameraLargura;
 
     // Use this for initialization
     void Start () {
 
-        cameraAltura = 2f * Camera.main.orthographicSize;
-        cameraLargura = cameraAltura* Camera.main.aspect;
+        cameraAltura = Controle.cameraAltura;
+        cameraLargura = Controle.cameraLargura;
         transform.position = new Vector3(1f,-1f,-10f);
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+        
         float cameraPosX = transform.position.x + cameraLargura;
         float cameraPosY = ((-transform.position.y) + cameraAltura);
 

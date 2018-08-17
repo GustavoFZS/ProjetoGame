@@ -13,23 +13,30 @@ public class criadorDeMapas : MonoBehaviour
 
         mapa = File.ReadAllLines("Mapas\\testes.txt");
 
-        float cameraAltura = 2f * Camera.main.orthographicSize;
-        float cameraLargura = cameraAltura * Camera.main.aspect;
+        float cameraAltura = Controle.cameraAltura;
+        float cameraLargura = Controle.cameraLargura;
 
-        y = Mathf.RoundToInt(cameraAltura/2);
+        y = Mathf.FloorToInt(cameraAltura/2);
         foreach (string linha in mapa)
         {
-            y--;
-            x = -Mathf.RoundToInt(cameraLargura/2);
+            y-= Controle.tamanhoCasas;
+            x = -Mathf.FloorToInt(cameraLargura/2) - Mathf.FloorToInt(Controle.tamanhoCasas/2);
             foreach (char coluna in linha)
             {
-                x++;
-                if(coluna == '*')
-                    Instantiate(parede, new Vector3(x, y, 0), Quaternion.identity);
-                if (coluna == 'A')
+                x+= Controle.tamanhoCasas;
+                switch (coluna)
+                {
+                case '*':
+                    parede = Instantiate(parede, new Vector3(x, y, 0), Quaternion.identity);
+                    parede.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
+                    break;
+                case 'A':
                     MontaTimeA(x, y);
-                if (coluna == 'B')
+                    break;
+                case 'B':
                     MontaTimeB(x, y);
+                    break;
+                }
             }
         }
     }

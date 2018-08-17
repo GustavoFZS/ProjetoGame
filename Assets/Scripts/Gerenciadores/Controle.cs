@@ -5,9 +5,12 @@ public class Controle : MonoBehaviour {
 
     static criadorDeMapas t = new criadorDeMapas();
     CenaCareTaker cenas = new CenaCareTaker();
-    static float larguraMapa;
-    static float alturaMapa;
+    public static float larguraMapa;
+    public static float alturaMapa;
+    public static int tamanhoCasas = 5;
     public static int turno;
+    public static float cameraAltura;
+    public static float cameraLargura;
 
     public Transform paredes;
     public Transform personagem;
@@ -16,9 +19,11 @@ public class Controle : MonoBehaviour {
 
     private void Awake()
     {
+        cameraAltura = 2f * Camera.main.orthographicSize;
+        cameraLargura = cameraAltura * Camera.main.aspect;
         t.criaMapa(paredes, personagem);
-        larguraMapa = getMapa()[0].Length;
-        alturaMapa = getMapa().Length;
+        larguraMapa = getMapa()[0].Length * tamanhoCasas;
+        alturaMapa = getMapa().Length * tamanhoCasas;
     }
 
     // Use this for initialization
