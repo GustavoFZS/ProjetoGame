@@ -116,7 +116,7 @@ public class AEstrela : MonoBehaviour
     {
         RaycastHit2D hit1 = Physics2D.Linecast(fonte, destino, solido);
 
-        if (hit1.transform == null)
+        if (hit1.transform == null || hit1.transform.position.z > 1)
         {
 
             return false;

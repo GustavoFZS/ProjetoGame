@@ -13,6 +13,7 @@ public class Controle : MonoBehaviour {
     public static float cameraLargura;
 
     public Transform paredes;
+    public Transform piso;
     public Transform personagem;
     public static Principal escolhido;
     public static Principal selecionado;
@@ -21,7 +22,7 @@ public class Controle : MonoBehaviour {
     {
         cameraAltura = 2f * Camera.main.orthographicSize;
         cameraLargura = cameraAltura * Camera.main.aspect;
-        t.criaMapa(paredes, personagem);
+        t.criaMapa(paredes, piso, personagem);
         larguraMapa = getMapa()[0].Length * tamanhoCasas;
         alturaMapa = getMapa().Length * tamanhoCasas;
     }

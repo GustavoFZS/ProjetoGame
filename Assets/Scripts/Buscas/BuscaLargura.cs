@@ -65,9 +65,9 @@ public class BuscaLargura : MonoBehaviour
                 {
                     visitados.Enqueue(novo);
                     grafoBusca.Enqueue(novo);
+                    var efeito = Instantiate(prefab, new Vector3(novo.x, novo.y, 1), Quaternion.identity);
+                    efeito.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
                 }
-                var efeito = Instantiate(prefab, new Vector3(novo.x, novo.y, 1), Quaternion.identity);
-                efeito.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
             }
 
         }

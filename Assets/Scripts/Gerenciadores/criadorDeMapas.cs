@@ -6,10 +6,12 @@ public class criadorDeMapas : MonoBehaviour
     public string[] mapa;
     int x, y;
     FabricaDePersonages fab;
+    FabricaDePisos fab2;
 
-    public void criaMapa(Transform parede, Transform personagem)
+    public void criaMapa(Transform parede, Transform piso, Transform personagem)
     {
         fab = new FabricaDePersonages(personagem);
+        fab2 = new FabricaDePisos(parede, piso);
 
         mapa = File.ReadAllLines("Mapas\\testes.txt");
 
@@ -24,12 +26,20 @@ public class criadorDeMapas : MonoBehaviour
             foreach (char coluna in linha)
             {
                 x+= Controle.tamanhoCasas;
+                if((x + y)%2 == 0)
+                {
+                    fab2.criaPiso(2, 0, false, x, y);
+                }
+                else
+                {
+                    fab2.criaPiso(2, 1, false, x, y);
+                }
+                fab2.criaPiso(3, 2, false, x, y);
                 switch (coluna)
                 {
                 case '*':
-                    parede = Instantiate(parede, new Vector3(x, y, 0), Quaternion.identity);
-                    parede.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
-                    break;
+                   fab2.criaPiso(1, 3, true, x, y);
+                   break;
                 case 'A':
                     MontaTimeA(x, y);
                     break;

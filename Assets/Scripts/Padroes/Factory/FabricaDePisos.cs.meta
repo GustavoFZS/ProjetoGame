@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b9b2e29a7205ace42b09cc02d56417b8
+timeCreated: 1534718209
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - solido: {fileID: 4101124071410118, guid: 8ede7edacdaef0a4681d0d200d387894, type: 2}
+  - paisagem: {fileID: 4150738072341208, guid: 6b0d6fc35fde4a54c95abd1a66b5d90f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
