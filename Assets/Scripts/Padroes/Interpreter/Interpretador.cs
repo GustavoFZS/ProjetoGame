@@ -1,7 +1,10 @@
-﻿public abstract class Interpretador
+﻿using System;
+using UnityEngine;
+
+public abstract class Interpretador : MonoBehaviour
 {
 
-    public abstract void recebeMensagem(Principal destino, string mensagem);
+    public abstract bool recebeMensagem(Personagem destino, Personagem emissor, Transform prefab);
 
     public virtual Interpretador clone()
     {

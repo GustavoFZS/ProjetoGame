@@ -7,9 +7,9 @@ public class Movimentacao : MonoBehaviour {
     public Transform prefab;
     public LayerMask solido;
 
-    public IEnumerator Mover()
+    public IEnumerator Mover(int maxMov)
     {
-        AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), getPosicaoMouseNaGrid(), Controle.getMapa());
+        AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), getPosicaoMouseNaGrid(), maxMov, Controle.getMapa());
         buscaCaminho.solido = solido;
         Stack<Passo> pilha = buscaCaminho.getCaminho();
         Passo atual;
@@ -24,10 +24,10 @@ public class Movimentacao : MonoBehaviour {
         }
     }
 
-    public void mostraRota()
+    public void mostraRota(int mov)
     {
 
-        BuscaLargura buscaCaminho = new BuscaLargura(new Vector2(transform.position.x, transform.position.y), 5);
+        BuscaLargura buscaCaminho = new BuscaLargura(new Vector2(transform.position.x, transform.position.y), mov);
         buscaCaminho.prefab = prefab;
         buscaCaminho.solido = solido;
         buscaCaminho.busca();

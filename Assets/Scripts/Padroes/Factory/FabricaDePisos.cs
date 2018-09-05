@@ -36,20 +36,23 @@ public class FabricaDePisos : MonoBehaviour
         switch (tipo)
         {
             case 0:
+                retorno.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
                 imagem = casaP;
                 break;
             case 1:
+                retorno.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
                 imagem = casaB;
                 break;
             case 2:
+                retorno.transform.localScale = new Vector3(1.25f, 1.25f);
                 imagem = piso;
                 break;
             case 3:
+                retorno.transform.localScale = new Vector3(1.25f, 1.25f);
                 imagem = obs;
                 break;
         }
 
-        retorno.transform.localScale = new Vector3(Controle.tamanhoCasas, Controle.tamanhoCasas);
         retorno.GetComponent<SpriteRenderer>().sprite = imagem;
         return retorno;
     }

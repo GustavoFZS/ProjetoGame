@@ -2,16 +2,16 @@
 
 public class Indisponivel : State
 {
-    Principal personagem;
+    Personagem personagem;
     
-    public Indisponivel(Principal personagem)
+    public Indisponivel(Personagem personagem)
     {
         this.personagem = personagem;
     }
 
     public override void clicado()
     {
-        Controle.escolhido = personagem;
+        Controle.setClicado(personagem);
     }
 
     public override bool useMouse()

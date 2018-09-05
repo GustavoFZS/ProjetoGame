@@ -1,14 +1,15 @@
 ﻿public class PodeAtacar : State
 {
-    Principal personagem;
+    Personagem personagem;
 
-    public PodeAtacar(Principal personagem)
+    public PodeAtacar(Personagem personagem)
     {
         this.personagem = personagem;
     }
 
     public override void clicado()
     {
+        Controle.setClicado(personagem);
         novoEstado();
     }
 
@@ -19,6 +20,7 @@
 
     public override void novoEstado()
     {
+        personagem.apagaRotas();
         personagem.setEstado(new Selecionado2(personagem));
     }
 

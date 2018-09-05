@@ -11,5 +11,10 @@ public abstract class State
     public abstract void novoEstado();
 
     public abstract bool useMouse();
-    
+
+    public virtual bool useHab(string novaHab)
+    {
+        return false;
+    }
+
 }

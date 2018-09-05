@@ -1,19 +1,22 @@
 ﻿public class Selecionado : State
 {
-    Principal personagem;
+    Personagem personagem;
 
-    public Selecionado(Principal personagem)
+    public Selecionado(Personagem personagem)
     {
         this.personagem = personagem;
         personagem.mudaBox();
-        Controle.escolhido = personagem;
-        personagem.GetComponent<Movimentacao>().mostraRota();
+        Controle.setClicado(personagem);
+        personagem.GetComponent<Movimentacao>().mostraRota(personagem.movimentacao);
         personagem.mudaBox();
     }
 
     public override void executaAcao()
     {
-        if (Controle.checaAcao(personagem.time)){
+        personagem.apagaRotas();
+
+        if (Controle.clicouNoNada())
+        { 
             if (personagem.anda())
             {
                 novoEstado();
@@ -21,15 +24,31 @@
             else
             {
                 voltaEstado();
-                personagem.apagaRotas();
             }
         }
         else
         {
-            Controle.escolhido.setMensagem(personagem.getHabilidade());
-            finaliza();
-            personagem.apagaRotas();
+            BuscaLargura buscaCaminho = new BuscaLargura(personagem.transform.position.x, personagem.transform.position.y, Controle.getClicado2().transform.position.x, Controle.getClicado2().transform.position.y, personagem.alcance);
+
+            if (buscaCaminho.busca2())
+            {
+                if (Controle.getClicado2().setMensagem(personagem))
+                {
+                    Controle.reiniciaClicados();
+                    finaliza();
+                }
+            }
+            else
+            {
+                voltaEstado();
+            }
         }
+    }
+
+    public override bool useHab(string novaHab)
+    {
+        personagem.setHabilidade(novaHab);
+        return true;
     }
 
     public override bool useMouse()
@@ -39,12 +58,17 @@
 
     public override void novoEstado()
     {
-        personagem.setEstado(new PodeAtacar(personagem));
+        personagem.setEstado(new Selecionado2(personagem));
     }
 
     void finaliza()
     {
-      //  personagem.setEstado(new Indisponivel(personagem));
+        personagem.setEstado(new Indisponivel(personagem));
+    }
+
+    public override void clicado()
+    {
+        Controle.setClicado(personagem);
     }
 
     void voltaEstado()

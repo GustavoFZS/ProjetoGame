@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4757331027783138}
   - component: {fileID: 212365190679807880}
+  - component: {fileID: 114091785787091540}
   m_Layer: 0
   m_Name: Passo
   m_TagString: AreaDeSelecao
@@ -40,6 +41,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114091785787091540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810286824347876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84917df1d24abea488c59cba5ed146c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dono: 0
 --- !u!212 &212365190679807880
 SpriteRenderer:
   m_ObjectHideFlags: 1

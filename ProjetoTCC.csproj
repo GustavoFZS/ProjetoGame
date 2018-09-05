@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -245,6 +243,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Buscas\AEstrela.cs" />
     <Compile Include="Assets\Scripts\Buscas\BuscaLargura.cs" />
+    <Compile Include="Assets\Scripts\Efeitos\Historico.cs" />
     <Compile Include="Assets\Scripts\Gerenciadores\CameraControlador.cs" />
     <Compile Include="Assets\Scripts\Gerenciadores\Controle.cs" />
     <Compile Include="Assets\Scripts\Gerenciadores\criadorDeMapas.cs" />
@@ -261,8 +260,11 @@
     <Compile Include="Assets\Scripts\Padroes\State\Selecionado.cs" />
     <Compile Include="Assets\Scripts\Padroes\State\Selecionado2.cs" />
     <Compile Include="Assets\Scripts\Padroes\State\State.cs" />
-    <Compile Include="Assets\Scripts\Principal.cs" />
+    <Compile Include="Assets\Scripts\Personagem.cs" />
+    <Compile Include="Assets\Scripts\Util\Casa.cs" />
     <Compile Include="Assets\Scripts\Util\FilaDePrioridades.cs" />
+    <Compile Include="Assets\Scripts\Util\MetaDataChars.cs" />
+    <Compile Include="Assets\Scripts\Util\Metodos.cs" />
     <Compile Include="Assets\Scripts\Util\Passo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

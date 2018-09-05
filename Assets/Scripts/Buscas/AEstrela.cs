@@ -10,12 +10,14 @@ public class AEstrela : MonoBehaviour
     Vector2 posFim;
     string[] mapa;
     int tamPasso;
+    int maxBusca;
     public LayerMask solido;
 
-    public AEstrela(Vector2 posIni, Vector2 posFim, String[] mapa)
+    public AEstrela(Vector2 posIni, Vector2 posFim, int maxBusca, String[] mapa)
     {
         this.posIni = posIni;
         this.posFim = posFim;
+        this.maxBusca = maxBusca;
         this.mapa = mapa;
         this.tamPasso = Controle.tamanhoCasas;
     }
@@ -66,16 +68,16 @@ public class AEstrela : MonoBehaviour
         Passo fim = new Passo((int)posFim.x, (int)posFim.y, 0, null);
         grafoBusca.Add(inicio, 0);
 
-        int teste = 0;
+        int nosVisitados = 0;
 
-        while (grafoBusca.contemNos())
+        while (grafoBusca.contemNos() && nosVisitados < maxBusca)
         {
-            teste++;
+            nosVisitados++;
             Passo atual = grafoBusca.get();
 
             if (atual.Equals(fim))
             {
-                Debug.Log("Caminho encontrado, último ponto: " + atual + " / Nós visitados: " + teste);
+                Debug.Log("Caminho encontrado, último ponto: " + atual + " / Nós visitados: " + nosVisitados);
                 return atual;
             }
 
@@ -102,7 +104,7 @@ public class AEstrela : MonoBehaviour
             }
         }
 
-        Debug.Log("Não há uma rota para a posição: " + fim + " / Nós visitados: " + teste);
+        Debug.Log("Não há uma rota para a posição: " + fim + " / Nós visitados: " + nosVisitados);
         return null;
 
     }

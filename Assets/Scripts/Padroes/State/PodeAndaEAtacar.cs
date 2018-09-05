@@ -2,17 +2,17 @@
 
 public class PodeAndaEAtacar : State
 {
-    Principal personagem;
+    Personagem personagem;
 
-    public PodeAndaEAtacar(Principal personagem)
+    public PodeAndaEAtacar(Personagem personagem)
     {
         this.personagem = personagem;
     }
 
     public override void clicado()
     {
+        Controle.setClicado(personagem);
         novoEstado();
-        Controle.escolhido = personagem;
     }
 
     public override bool useMouse()
@@ -22,6 +22,7 @@ public class PodeAndaEAtacar : State
 
     public override void novoEstado()
     {
+        personagem.apagaRotas();
         personagem.setEstado(new Selecionado(personagem));
     }
 
