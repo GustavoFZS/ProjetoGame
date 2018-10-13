@@ -4,4 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scene/Tela inicial.unity
+    guid: 9b6a2b756caaefc428f8a7c69ce53f6e
+  - enabled: 1
+    path: Assets/Scene/Tela de espera.unity
+    guid: 98325c06e9335b645abea2c154cdc4af
+  - enabled: 1
+    path: Assets/Scene/Campanha.unity
+    guid: fa73bf7e920a2f04a9858f40e042b206
+  - enabled: 1
+    path: Assets/Scene/2 Play.unity
+    guid: c97e33e441660d54b94cb8bc0505c427
+  - enabled: 1
+    path: Assets/Scene/2 Play (Rede).unity
+    guid: 79856d1159156ad4ba16ef96cd024bd0

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,7 +76,7 @@ public class AEstrela : MonoBehaviour
 
             if (atual.Equals(fim))
             {
-                Debug.Log("Caminho encontrado, último ponto: " + atual + " / Nós visitados: " + nosVisitados);
+                //Debug.Log("Caminho encontrado, último ponto: " + atual + " / Nós visitados: " + nosVisitados);
                 return atual;
             }
 

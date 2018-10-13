@@ -3,25 +3,31 @@ using UnityEngine;
 
 public class Controle : MonoBehaviour {
 
-    static criadorDeMapas t = new criadorDeMapas();
-    CenaCareTaker cenas = new CenaCareTaker();
+    bool cliqueBotaoTurno;
     public static float larguraMapa;
     public static float alturaMapa;
     public static int tamanhoCasas = 5;
-    public static int turno;
+    public static int turno = 0;
+    public static int time = 0;
     public static float cameraAltura;
     public static float cameraLargura;
+    public static Personagem selecionado;
 
+    static criadorDeMapas t = new criadorDeMapas();
+    static CenaCareTaker cenas = new CenaCareTaker();
+    public static Personagem escolhido;
+    public Transform prefab;
+    public LayerMask solido;
     public Transform paredes;
     public Transform piso;
     public Transform personagem;
-    public static Personagem escolhido;
-
+    public Conexao conexao;
     static Personagem clicado1;
     static Personagem clicado2;
-    static Personagem selecionado;
+    static Maquina maquina;
 
-    bool cliqueBotaoTurno;
+    public static ClienteP2P cliente;
+    public static ServidorP2P servidor;
 
     private void Awake()
     {
@@ -34,16 +40,34 @@ public class Controle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        if (Fluxo.tipoJogo == 1)
+        {
+            maquina = new Maquina();
+        }
+        if (Fluxo.tipoJogo == 2)
+        {
+            conexao = new Conexao();
+            cliente = new ClienteP2P();
+            servidor = new ServidorP2P();
+        }
         turno = 1;
-        mudaTurno();
+        mudaTurno(false);
+        BuscaLargura.init(prefab, solido);
     }
 	
 	// Update is called once per frame
 	void Update () {
-                
+
         if (Input.GetButtonDown("PassaTurno") || cliqueBotaoTurno)
         {
-            mudaTurno();
+            if (Metodos.checaAcao())
+            {
+                mudaTurno();
+                if (Fluxo.tipoJogo == 2)
+                {
+                    cliente.EnviaTurnMsg();
+                }
+            }
         }
 
         if (Input.GetButtonDown("Volta"))
@@ -73,6 +97,7 @@ public class Controle : MonoBehaviour {
 
     public static void setClicado(Personagem novo)
     {
+
         selecionado = novo;
 
         if (clicado1 == null)
@@ -118,11 +143,6 @@ public class Controle : MonoBehaviour {
         return clicado2;
     }
 
-    public static bool cliqueDuplo()
-    {
-        return clicado1 == clicado2;
-    }
-
     public static string[] getMapa()
     {
         return t.mapa;
@@ -147,7 +167,7 @@ public class Controle : MonoBehaviour {
             myButtonStyle.fontSize = 18;
             GUI.Box(new Rect(750, 400, 300, 350), selecionado.ToString(), myButtonStyle);
             
-            if (turno == 0)
+            if (turno == time)
             {
                 cliqueBotaoTurno = GUI.Button(new Rect(750, 350, 300, 50), "Passar o turno", myButtonStyle);
             }
@@ -165,7 +185,7 @@ public class Controle : MonoBehaviour {
         return Mathf.Sqrt(Mathf.Pow(clicado2.transform.position.x - x, 2) + Mathf.Pow(clicado2.transform.position.y - y, 2)) < dist;
     }
 
-    void mudaTurno()
+    public static void mudaTurno(bool enviaMsg = true)
     {
         turno = turno == 0 ? 1 : 0;
         LinkedList<GameObject> players = new LinkedList<GameObject>(GameObject.FindGameObjectsWithTag("Player"));

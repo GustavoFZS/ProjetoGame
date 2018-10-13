@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b720423446a95eb4e8752dc28c192279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  personalidade: 0
+  id: 
   vida: 0
   ataque: 0
   alcance: 0
@@ -93,7 +95,7 @@ MonoBehaviour:
   movimentacaoInicial: 0
   defesaInicial: 0
   energiaInicial: 0
-  efeitoGui: {fileID: 4737915005653156, guid: 930bc07cc45b3ff469a1b1c4214ba607, type: 2}
+  aTexture: {fileID: 2800000, guid: 1519984c5cfaf3645880f13d551a5cbd, type: 3}
 --- !u!114 &114981540375833872
 MonoBehaviour:
   m_ObjectHideFlags: 1

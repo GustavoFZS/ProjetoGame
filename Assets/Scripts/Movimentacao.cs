@@ -7,9 +7,9 @@ public class Movimentacao : MonoBehaviour {
     public Transform prefab;
     public LayerMask solido;
 
-    public IEnumerator Mover(int maxMov)
+    public IEnumerator Mover(int maxMov, Vector2 posicao)
     {
-        AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), getPosicaoMouseNaGrid(), maxMov, Controle.getMapa());
+        AEstrela buscaCaminho = new AEstrela(new Vector2(transform.position.x, transform.position.y), posicao, maxMov, Controle.getMapa());
         buscaCaminho.solido = solido;
         Stack<Passo> pilha = buscaCaminho.getCaminho();
         Passo atual;
@@ -21,29 +21,12 @@ public class Movimentacao : MonoBehaviour {
             transform.position = novaPos;
             atual = atual.anterior;
             yield return new WaitForSeconds(0.08f);
-        }
+        } 
     }
 
     public void mostraRota(int mov)
     {
-
-        BuscaLargura buscaCaminho = new BuscaLargura(new Vector2(transform.position.x, transform.position.y), mov);
-        buscaCaminho.prefab = prefab;
-        buscaCaminho.solido = solido;
-        buscaCaminho.busca();
-
-    }
-
-    public Vector3 getPosicaoMouseNaGrid()
-    {
-
-        Vector2 vetorAux;
-
-        vetorAux = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        vetorAux = new Vector2(Mathf.Round(vetorAux.x/Controle.tamanhoCasas)*Controle.tamanhoCasas, Mathf.Round(vetorAux.y/Controle.tamanhoCasas) *Controle.tamanhoCasas);
-
-        return vetorAux;
-
+        BuscaLargura.busca(new Passo((int) transform.position.x, (int) transform.position.y), mov);
     }
 
 }

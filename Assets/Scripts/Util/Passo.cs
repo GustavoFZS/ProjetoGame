@@ -7,7 +7,7 @@ public class Passo : IComparable<Passo>
     public int peso;
     public Passo anterior;
 
-    public Passo(int x, int y, int peso, Passo anterior)
+    public Passo(int x, int y, int peso = 0, Passo anterior = null)
     {
         this.x = x;
         this.y = y;
@@ -32,6 +32,11 @@ public class Passo : IComparable<Passo>
         Passo p = (Passo)obj;
 
         return (x == p.x) && (y == p.y);
+    }
+
+    public bool distValida(Passo passo, int dist)
+    {
+        return (Math.Abs(x - passo.x) + Math.Abs(y - passo.y)) <= dist*5;
     }
 
     public override int GetHashCode()
