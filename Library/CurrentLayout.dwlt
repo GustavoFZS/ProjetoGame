@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 371}
+  m_MinSize: {x: 950, y: 392}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 675
-  m_MinSize: {x: 479, y: 321}
-  m_MaxSize: {x: 8004, y: 8021}
+  m_MinSize: {x: 479, y: 342}
+  m_MaxSize: {x: 8004, y: 8042}
   vertical: 0
-  controlID: 1632
+  controlID: 9
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,10 +130,10 @@ MonoBehaviour:
     y: 0
     width: 968
     height: 675
-  m_MinSize: {x: 202, y: 321}
-  m_MaxSize: {x: 4002, y: 8021}
+  m_MinSize: {x: 202, y: 342}
+  m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 1633
+  controlID: 10
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -152,8 +152,8 @@ MonoBehaviour:
     y: 0
     width: 968
     height: 442
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 11}
@@ -179,8 +179,8 @@ MonoBehaviour:
     y: 442
     width: 968
     height: 233
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 13}
@@ -205,8 +205,8 @@ MonoBehaviour:
     y: 0
     width: 398
     height: 675
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -397,7 +397,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 9250fbff3851fbff8852fbff9852fbffae52fbffba52fbffbe52fbffac56fbff5257fbffa258fbffb258fbffc858fbffd458fbffd858fbffec99fbff929afbffe29bfbfff29bfbff089cfbff149cfbff189cfbff429ffbffe89ffbff38a1fbff48a1fbff5ea1fbff6aa1fbff6ea1fbff76a5fbff1ca6fbff6ca7fbff7ca7fbff92a7fbff9ea7fbffa2a7fbffceaafbff74abfbffc4acfbffd4acfbffeaacfbfff6acfbfffaacfbffa018fcff8621fcff26d8fcff3cdafcff96f2fcff9439fdff44a7fdffeaa7fdff3aa9fdff4aa9fdff60a9fdff6ca9fdff70a9fdff06adfdffacadfdfffcaefdff0caffdff22affdff2eaffdff32affdfff019ffffc4b8ffff5eb9ffffaebaffffbebaffffd4baffffe0baffffe4baffff72bdffff0cbeffff60bfffff74bfffff8ebfffff9ebfffffa6bfffff34d1ffffc6d1ffff16d3ffff26d3ffff3cd3ffff48d3ffff4cd3ffff6cd7ffff10d8ffff60d9ffff70d9ffff86d9ffff92d9ffff96d9ffff98fbffff00000000
+    m_ExpandedIDs: b2a0ffff58a1ffffa6a2ffffb6a2ffffcca2ffffd8a2ffffdca2ffff8aa6ffff30a7ffff7ea8ffff8ea8ffffa4a8ffffb0a8ffffb4a8ffffc0b2ffff66b3ffffb4b4ffffc4b4ffffdab4ffffe6b4ffffeab4ffff70b9ffff16baffff64bbffff74bbffff8abbffff96bbffff9abbffff7abfffff20c0ffff6ec1ffff7ec1ffff94c1ffffa0c1ffffa4c1ffff04c6ffffaac6fffff8c7ffff08c8ffff1ec8ffff2ac8ffff2ec8ffffccccffff72cdffffc0ceffffd0ceffffe6cefffff2cefffff6ceffff74d3ffff1ad4ffff68d5ffff78d5ffff8ed5ffff9ad5ffff9ed5ffff98fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -471,7 +471,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: de270000
     m_LastClickedID: 10206
-    m_ExpandedIDs: 00000000da270000ffffff7f
+    m_ExpandedIDs: 00000000da270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -499,7 +499,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000da270000ffffff7f
+    m_ExpandedIDs: 00000000da270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
