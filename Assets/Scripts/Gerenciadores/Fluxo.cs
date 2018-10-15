@@ -4,8 +4,9 @@ using UnityEngine;
 public class Fluxo : MonoBehaviour
 {
     public static int tipoJogo = 0;
-    public static int porta2 = 11000;
+    public static int porta2 = 11522;
     public static string ip2 = "";
+    public static bool partidaInicada = false;
 
     private static bool created = false;
 
@@ -18,11 +19,7 @@ public class Fluxo : MonoBehaviour
 
             string[] endereco = File.ReadAllLines("Config\\server_ip.txt");
 
-            foreach (string linha in endereco)
-            {
-                ip2 = linha;
-            }
-
+            ip2 = endereco[0];
         }
     }
 }

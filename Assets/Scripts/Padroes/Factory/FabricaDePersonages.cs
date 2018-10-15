@@ -8,17 +8,18 @@ public class FabricaDePersonages : MonoBehaviour{
     int tipo = 0;
 
     string padrao = "Padrao%tipo-0";
-    string cura = "Cura%tipo:1|vida:10|vida_duracao-3";
-    string furia = "Fúria%tipo:0|ataque-50";
-    string corre = "Corre%tipo:3|movimentacao-10";
+    string cura = "Cura%tipo-1|vida-25|vida_duracao-3";
+    string cura2 = "Cura2%tipo-1|vida-45";
+    string furia = "Fúria%tipo-0|ataque-50";
+    string corre = "Corre%tipo-3|movimentacao-10|movimentacao_duracao-1";
 
     public FabricaDePersonages(Transform personagem)
     {
         int indice = 0;
         metaDatas.Add(indice++, new MetaDataChars(100, 150, 70, 4, 4, Resources.Load<Sprite>("Mago"), "Mago", padrao, cura, corre));
-        metaDatas.Add(indice++, new MetaDataChars(190, 160, 100, 5, 3, Resources.Load<Sprite>("Barbaro"), "Barbaro", padrao, cura, furia));
+        metaDatas.Add(indice++, new MetaDataChars(190, 160, 100, 2, 3, Resources.Load<Sprite>("Barbaro"), "Barbaro", padrao, cura, furia));
         metaDatas.Add(indice++, new MetaDataChars(80, 130, 70, 4, 5, Resources.Load<Sprite>("Arqueiro"), "Arqueiro", padrao, cura, furia));
-        metaDatas.Add(indice++, new MetaDataChars(210, 170, 85, 3, 3, Resources.Load<Sprite>("Troll"), "Troll", padrao, cura, furia));
+        metaDatas.Add(indice++, new MetaDataChars(210, 170, 85, 2, 3, Resources.Load<Sprite>("Troll"), "Troll", padrao, cura, furia));
         metaDatas.Add(indice++, new MetaDataChars(110, 200, 75, 3, 4, Resources.Load<Sprite>("Mago2"), "Mago2", padrao, cura, furia));
         metaDatas.Add(indice++, new MetaDataChars(200, 100, 150, 2, 3, Resources.Load<Sprite>("Regenerator"), "Regenerator", padrao, cura, furia));
         metaDatas.Add(indice++, new MetaDataChars(250, 120, 200, 2, 2, Resources.Load<Sprite>("Rocha"), "Rocha", padrao, cura, furia));

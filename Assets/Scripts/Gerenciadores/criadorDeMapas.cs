@@ -13,7 +13,7 @@ public class criadorDeMapas : MonoBehaviour
         fab = new FabricaDePersonages(personagem);
         fab2 = new FabricaDePisos(parede, piso);
 
-        mapa = File.ReadAllLines("Mapas\\testes2.txt");
+        mapa = File.ReadAllLines("Mapas\\EP_Redes.txt");
 
         float cameraAltura = Controle.cameraAltura;
         float cameraLargura = Controle.cameraLargura;

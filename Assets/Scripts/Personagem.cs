@@ -26,6 +26,7 @@ public class Personagem : MonoBehaviour {
     public Texture aTexture;
 
     bool mouseFora = false;
+    bool usouHabilidade = false;
     string habilidade;
     string habPadrao;
     string especial1;
@@ -50,14 +51,16 @@ public class Personagem : MonoBehaviour {
 
         if (estado.useMouse() && Metodos.checaAcao())
         {
-            if (Input.GetButtonDown("Hab1"))
+            if (Input.GetButtonDown("Hab1") && !usouHabilidade)
             {
+                usouHabilidade = true;
                 estado.useHab(especial1);
                 interpretador.recebeMensagem(this, this, "");
             }
 
-            if (Input.GetButtonDown("Hab2"))
+            if (Input.GetButtonDown("Hab2") && !usouHabilidade)
             {
+                usouHabilidade = true;
                 estado.useHab(especial2);
                 interpretador.recebeMensagem(this, this, "");
             }
@@ -65,6 +68,7 @@ public class Personagem : MonoBehaviour {
 
         if (vida < 1)
         {
+            Controle.checaFimDoJogo(this);
             Destroy(gameObject);
         }
 
@@ -87,6 +91,11 @@ public class Personagem : MonoBehaviour {
         {
             estado.clicado();
         }
+    }
+
+    public void resetaHad()
+    {
+        habilidade = habPadrao;
     }
 
     public void adiconaEfeito(string novoEfeito, int duracao)
@@ -284,6 +293,7 @@ public class Personagem : MonoBehaviour {
 
     void OnGUI()
     {
+        GUI.contentColor = time == 1 ? Color.red : Color.blue;
         Vector2 posicaoTela = Camera.main.WorldToScreenPoint(transform.position);
         float aux = Screen.height - posicaoTela.y;
         GUIStyle myLabelStyle = new GUIStyle(GUI.skin.label);

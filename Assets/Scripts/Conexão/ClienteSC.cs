@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using UnityEngine;
 
 public class ClienteSC : ClienteModelo
 {
@@ -10,7 +9,10 @@ public class ClienteSC : ClienteModelo
     private void Update()
     {
         checkRespostas();
-        procuraJogadores();
+        if (!Fluxo.partidaInicada)
+        {
+            procuraJogadores();
+        }
     }
 
     public void Start()

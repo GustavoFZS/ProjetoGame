@@ -6,44 +6,49 @@ using UnityEngine;
 
 public class ServidorP2P : MonoBehaviour
 {
-    public static int porta = 11005;
+    public static int porta = 11553;
 
-    string data;
     byte[] bytes = new Byte[2048];
 
     IPHostEntry ipHostInfo;
     IPAddress ipAddress;
     IPEndPoint localEndPoint;
-    Socket listener;
+    Socket sckServidor;
 
     void Update()
     {
-        if (listener.Poll(1000, SelectMode.SelectRead))
+        if (sckServidor.Poll(100, SelectMode.SelectRead))
         {
-            Socket handler = listener.Accept();
+            Socket sckNovo = sckServidor.Accept();
 
-            if (handler.Available > 0)
+            if (sckNovo.Available > 0)
             {
-                data = "";
+                string mensagem = "";
                 while (true)
                 {
-                    int bytesRec = handler.Receive(bytes);
-                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                    if (data.IndexOf("\n") > -1)
+                    int dadosRecebidos = sckNovo.Receive(bytes);
+                    mensagem += Encoding.ASCII.GetString(bytes, 0, dadosRecebidos);
+                    if (mensagem.IndexOf("\n") > -1)
                     {
                         break;
                     }
                 }
 
-                string resposta = InterpretadorDeMensagens.recebeMensagem(data);
-                byte[] msg = Encoding.ASCII.GetBytes(resposta);
+                Historico.recebeValor("Mensagem recebida: " + mensagem);
 
-                Historico.recebeValor("Mensagem recebida: " + data);
-                Historico.recebeValor("Mensagem enviada: " + resposta);
+                if (mensagem.Contains("status"))
+                {
+                    InterpretadorDeMensagens.recebeResposta(mensagem);
+                }
+                else
+                {
+                    string resposta = InterpretadorDeMensagens.recebeMensagem(mensagem);
+                    byte[] msg = Encoding.ASCII.GetBytes(resposta);
+                    Controle.cliente.EnviaMensagem(resposta);
+                }
 
-                handler.Send(msg, 0, msg.Length, SocketFlags.None);
-                handler.Shutdown(SocketShutdown.Send);
-                handler.Close();
+                sckNovo.Shutdown(SocketShutdown.Both);
+                sckNovo.Close();
             }
         }
     }
@@ -56,11 +61,11 @@ public class ServidorP2P : MonoBehaviour
             ipAddress = ipHostInfo.AddressList[0];
             localEndPoint = new IPEndPoint(ipAddress, porta);
 
-            listener = new Socket(ipAddress.AddressFamily,
+            sckServidor = new Socket(ipAddress.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
 
-            listener.Bind(localEndPoint);
-            listener.Listen(10);
+            sckServidor.Bind(localEndPoint);
+            sckServidor.Listen(10);
         }
         catch (Exception e)
         {

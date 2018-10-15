@@ -87,6 +87,7 @@ public class InterpretadorDeHabilidades : Interpretador
         if (!nome.Equals("Padrao"))
         {
             Historico.recebeValor(emissor.nome + " usou " + nome + ".");
+            emissor.resetaHad();
         }
 
         string[] campos = { "vida", "defesa", "ataque", "alcance", "movimentacao",

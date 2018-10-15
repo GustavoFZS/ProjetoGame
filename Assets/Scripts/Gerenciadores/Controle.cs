@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Controle : MonoBehaviour {
 
@@ -8,10 +9,11 @@ public class Controle : MonoBehaviour {
     public static float alturaMapa;
     public static int tamanhoCasas = 5;
     public static int turno = 0;
-    public static int time = 0;
+    public static int time = -1;
     public static float cameraAltura;
     public static float cameraLargura;
     public static Personagem selecionado;
+    public static string ultimaMsg;
 
     static criadorDeMapas t = new criadorDeMapas();
     static CenaCareTaker cenas = new CenaCareTaker();
@@ -161,6 +163,7 @@ public class Controle : MonoBehaviour {
 
     void OnGUI()
     {
+
         if (selecionado != null)
         {
             GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
@@ -198,5 +201,44 @@ public class Controle : MonoBehaviour {
         }
         CenaMemento novaCena = new CenaMemento(estadoAnterior);
         cenas.adicionarMemento(novaCena);
+    }
+
+    public static void checaFimDoJogo(Personagem per)
+    {
+        LinkedList<GameObject> players = new LinkedList<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        LinkedList<GameObject>.Enumerator enu = players.GetEnumerator();
+        int pers1 = 0;
+        int pers2 = 0;
+        while (enu.MoveNext())
+        {
+            Personagem perAtual = enu.Current.GetComponent<Personagem>();
+            if (perAtual == per)
+            {
+                continue;
+            }
+            if (perAtual.time == 0)
+            {
+                pers1++;
+            }
+            if (perAtual.time == 1)
+            {
+                pers2++;
+            }
+        }
+        string msg = "Parabéns! Você ganhou";
+        if ((pers1 == 0 && time == 0) || (pers2 == 0 && time == 1))
+        {
+            msg = "Derrota! Mais sorte na próxima";
+        }
+        if (pers1 == 0 && pers2 != 0)
+        {
+            SceneManager.LoadScene("Tela inicial", LoadSceneMode.Single);
+            TelaInicial.msg = msg;
+        }
+        if (pers2 == 0 && pers1 != 0)
+        {
+            SceneManager.LoadScene("Tela inicial", LoadSceneMode.Single);
+            TelaInicial.msg = msg;
+        }
     }
 }

@@ -48,6 +48,15 @@ public class Metodos : MonoBehaviour
         return retorno;
     }
 
+    public static string criaResposta(string nome, string valor)
+    {
+        string retorno = "metodo:" + nome + ";";
+        retorno += "status:";
+        retorno += valor;
+        retorno += ";";
+        return retorno;
+    }
+
     public static string criaMensagem(string nome, List<string> parametros, List<string> valores)
     {
         string retorno = "metodo:" + nome + ";";

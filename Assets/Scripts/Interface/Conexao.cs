@@ -37,6 +37,10 @@ public class Conexao : MonoBehaviour
         {
             texto = "Servidor indisponível";
         }
+        else
+        {
+            texto = "Aguarde outro jogador...";
+        }
 
         if (Fluxo.porta2 == 0 && !indisponivel)
         {

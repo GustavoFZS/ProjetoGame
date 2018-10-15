@@ -3,13 +3,13 @@
 public class Historico : MonoBehaviour
 {
 
-    public static string[] valores = new string[] { "Inicio da partida.", "", "", "", "" };
+    public static string[] valores = new string[] { "Inicio da partida.", "", "", "", "", "", "", "", "" };
 
     void OnGUI()
     {
         for (int i = 0; i < valores.Length; i++)
         {
-            GUI.Label(new Rect(10, 650 - (25 * i), 500, 50), valores[i].ToString());
+            GUI.Label(new Rect(10, 650 - (30 * i), 590, 50), valores[i].ToString());
         }
     }
 

@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClienteModelo : MonoBehaviour
 {
@@ -11,19 +12,29 @@ public class ClienteModelo : MonoBehaviour
 
     public void checkRespostas()
     {
-        if (sckCliente.Connected)
+        try
         {
-            string data = "";
-            while (true)
+            if (sckCliente.Connected)
             {
-                int bytesRec = sckCliente.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.IndexOf("\n") > -1)
+                string data = "";
+                while (true)
                 {
-                    break;
+                    int bytesRec = sckCliente.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if (data.IndexOf("\n") > -1)
+                    {
+                        break;
+                    }
                 }
+                InterpretadorDeMensagens.recebeResposta(data);
             }
-            InterpretadorDeMensagens.recebeResposta(data);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+            Conexao.indisponivel = true;
+            SceneManager.LoadScene("Tela inicial", LoadSceneMode.Single);
+            TelaInicial.erro = "Houve algum problmea com o servidor, por favor tente novamente";
         }
     }
 
@@ -53,22 +64,29 @@ public class ClienteModelo : MonoBehaviour
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Fluxo.ip2);
             IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, porta);
-            
+
+            Debug.Log(Fluxo.ip2 + ":" + porta);
+            Debug.Log(mensagem);
+
             sckCliente = new Socket(ipAddress.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
 
             sckCliente.Connect(remoteEP);
 
             Historico.recebeValor("Mensagem enviada: " + mensagem);
-            Debug.Log(mensagem);
+            Controle.ultimaMsg = mensagem;
 
             byte[] msg = Encoding.UTF8.GetBytes(mensagem + "\n");
             sckCliente.Send(msg, 0, msg.Length, SocketFlags.None);
+
+            Conexao.indisponivel = false;
         }
         catch (Exception e)
         {
             Debug.Log(e.ToString());
             Conexao.indisponivel = true;
+            SceneManager.LoadScene("Tela inicial", LoadSceneMode.Single);
+            TelaInicial.erro = "Ops! Houve algum problema com a conexão";
         }
     }
 }

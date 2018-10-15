@@ -30,7 +30,7 @@ public class Selecionado : State
         else
         {
             personagem.mudaBox();
-            if (BuscaLargura.buscaOrientada(personagem.toPasso(), Controle.getClicado2().toPasso(), personagem.alcance))
+            if (Controle.getClicado2() != null && BuscaLargura.buscaOrientada(personagem.toPasso(), Controle.getClicado2().toPasso(), personagem.alcance))
             {
                 if (Controle.getClicado2().setMensagem(personagem))
                 {

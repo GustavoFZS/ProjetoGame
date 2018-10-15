@@ -16,7 +16,7 @@ public class BuscaLargura : MonoBehaviour
         mapa = Controle.getMapa();
     }
 
-    static Queue<Passo> getSucessores(Passo pos, int tamBusca)
+    static Queue<Passo> getSucessores(Passo pos, int tamBusca, bool checaColisao = true)
     {
 
         Queue<Passo> retorno = new Queue<Passo>();
@@ -26,11 +26,13 @@ public class BuscaLargura : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            if (!verificaColisaoLinha(new Vector2(x, y), new Vector2(x + tamPasso * aux[i], y + tamPasso * aux[(i + 2) % 4])) && (pos.peso + 1) < tamBusca)
-            {
-                retorno.Enqueue(new Passo(x + tamPasso * aux[i], y + tamPasso * aux[(i + 2) % 4], pos.peso + 1, pos));
+            if (!checaColisao || !verificaColisaoLinha(new Vector2(x, y), new Vector2(x + tamPasso * aux[i], y + tamPasso * aux[(i + 2) % 4])) && (pos.peso + 1) < tamBusca)
+            { 
+                if ((pos.peso + 1) < tamBusca)
+                {
+                    retorno.Enqueue(new Passo(x + tamPasso * aux[i], y + tamPasso * aux[(i + 2) % 4], pos.peso + 1, pos));
+                }
             }
-
         }
 
         return retorno;
@@ -70,18 +72,18 @@ public class BuscaLargura : MonoBehaviour
         Queue<Passo> grafoBusca = new Queue<Passo>();
         Queue<Passo> visitados = new Queue<Passo>();
         grafoBusca.Clear();
-
+        
         grafoBusca.Enqueue(inicio);
 
         while (grafoBusca.Count > 0)
         {
             Passo atual = grafoBusca.Dequeue();
-            Queue<Passo> retorno = getSucessores(atual, largura);
-
+            Queue<Passo> retorno = getSucessores(atual, largura, false);
+            
             while (retorno.Count > 0)
             {
                 Passo novo = retorno.Dequeue();
-                
+
                 if ((novo.Equals(fim) && !recuar) || (!novo.Equals(fim) && recuar))
                 {
                     return true;

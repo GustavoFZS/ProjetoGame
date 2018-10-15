@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/Gustavo/Documents/Facul/TCC/V 0.5/v1.exe
+C:/Users/Gustavo/Documents/Facul/TCC/final/v1.exe
 SceneListBegin?
 Assets/Scene/Tela inicial.unity
 Assets/Scene/Tela de espera.unity

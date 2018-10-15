@@ -14,14 +14,18 @@ public class Selecionado2 : State
         if (!Controle.clicouNoNada())
         {
             personagem.mudaBox();
-            //if (BuscaLargura.busca2())
-            //{
+            if (Controle.getClicado2() != null && BuscaLargura.buscaOrientada(personagem.toPasso(), Controle.getClicado2().toPasso(), personagem.alcance))
+            {
                 if (Controle.getClicado2().setMensagem(personagem))
                 {
                     Controle.reiniciaClicados();
                     novoEstado();
                 }
-            //}
+            }
+            else
+            {
+                voltaEstado();
+            }
             personagem.mudaBox();
         }
     }
@@ -40,6 +44,11 @@ public class Selecionado2 : State
     public override void novoEstado()
     {
         personagem.setEstado(new Indisponivel(personagem));
+    }
+
+    void voltaEstado()
+    {
+        personagem.setEstado(new PodeAtacar(personagem));
     }
 
 }

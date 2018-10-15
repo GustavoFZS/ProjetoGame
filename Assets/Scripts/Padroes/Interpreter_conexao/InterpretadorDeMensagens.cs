@@ -7,12 +7,11 @@ public class InterpretadorDeMensagens : MonoBehaviour
 {
     public static void recebeResposta(string msg)
     {
+
         string[] decode = msg.Split(';');
         string status = decode[0].Split(':')[1];
         string metodo = decode[1].Split(':')[1];
         Dictionary< string, string> parametros = new Dictionary<string, string>();
-
-        Debug.Log(metodo);
 
         if (msg.Contains("parametros"))
         {
@@ -24,11 +23,6 @@ public class InterpretadorDeMensagens : MonoBehaviour
                 string valor = valore.Split('=')[1];
                 parametros.Add(nome, valor);
             }
-        }
-        
-        if (metodo.Equals("mudaTurno"))
-        {
-            Controle.mudaTurno();
         }
 
         if (metodo.Contains("registraJogador"))
@@ -45,6 +39,8 @@ public class InterpretadorDeMensagens : MonoBehaviour
                 Debug.Log("Erro: " + status);
                 return;
             }
+
+            Fluxo.partidaInicada = true;
 
             string porta1, porta2, ip1, ip2;
             parametros.TryGetValue("porta1", out porta1);
@@ -66,10 +62,18 @@ public class InterpretadorDeMensagens : MonoBehaviour
             SceneManager.LoadScene("2 Play (Rede)", LoadSceneMode.Single);
         }
 
+        if (status.Equals("300"))
+        {
+            Controle.cliente.EnviaMensagem(Controle.ultimaMsg);
+            Historico.recebeValor("Mensagem reenviada: " + Controle.ultimaMsg);
+            return;
+        }
+
     }
 
     public static string recebeMensagem(string msg)
     {
+
         Debug.Log(msg);
 
         string[] decode = msg.Split(';');
@@ -92,7 +96,7 @@ public class InterpretadorDeMensagens : MonoBehaviour
         if (metodo.Equals("mudaTurno"))
         {
             Controle.mudaTurno();
-            retorno = Metodos.criaMensagem(metodo, "status", "200");
+            retorno = Metodos.criaResposta(metodo, "200");
         }
 
         if (metodo.Equals("movimenta"))
@@ -113,15 +117,15 @@ public class InterpretadorDeMensagens : MonoBehaviour
                     Vector2 vec = new Vector2(float.Parse(pos_x), float.Parse(pos_y));
                     if (per.anda(vec, true))
                     {
-                        retorno = Metodos.criaMensagem(metodo, "status", "200");
+                        return Metodos.criaResposta(metodo, "200");
                     }
                     else
                     {
-                        retorno = Metodos.criaMensagem(metodo, "status", "300");
+                        return Metodos.criaResposta(metodo, "300");
                     }
-                    break;
                 }
             }
+            Metodos.criaResposta(metodo, "500");
         }
 
         if (metodo.Equals("habilidade"))
@@ -152,11 +156,11 @@ public class InterpretadorDeMensagens : MonoBehaviour
             Interpretador interpretador = new InterpretadorDeHabilidades();
             if (interpretador.recebeMensagem(destino, origem, habilidade, false))
             {
-                retorno = Metodos.criaMensagem(metodo, "status", "200");
+                return Metodos.criaResposta(metodo, "200");
             }
             else
             {
-                retorno = Metodos.criaMensagem(metodo, "status", "300");
+                return Metodos.criaResposta(metodo, "500");
             }
         }
 
