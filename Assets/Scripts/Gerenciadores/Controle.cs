@@ -176,7 +176,7 @@ public class Controle : MonoBehaviour {
             }
             else
             {
-                cliqueBotaoTurno = GUI.Button(new Rect(750, 350, 300, 50), "Aguarde", myButtonStyle);
+                cliqueBotaoTurno = GUI.Button(new Rect(750, 350, 300, 50), "Passar o turno", myButtonStyle);
             }
         }
     }

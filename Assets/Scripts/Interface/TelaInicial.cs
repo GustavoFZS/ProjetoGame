@@ -55,7 +55,7 @@ public class TelaInicial : MonoBehaviour
         GUI.Label(new Rect(100, 100, 300, 50), "O jogo sem nome", myLabelStyle);
         myLabelStyle.fontSize = 12;
         GUI.contentColor = Color.black;
-        GUI.Label(new Rect(100, 135, 300, 50), "EP Redes 2018 (Opção de jogo online)", myLabelStyle);
+        GUI.Label(new Rect(100, 135, 300, 50), "PSG II - 2018", myLabelStyle);
 
         if (!msg.Equals(""))
         {

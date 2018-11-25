@@ -17,7 +17,6 @@ public class FabricaDePisos : MonoBehaviour
         casaB = Resources.Load<Sprite>("CasaB");
         piso = Resources.Load<Sprite>("Piso");
         obs = Resources.Load<Sprite>("obstaculo");
-
     }
 
     public Transform criaPiso(int camada, int tipo, bool ehSolido, float x, float y)
